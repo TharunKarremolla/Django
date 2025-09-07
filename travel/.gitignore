@@ -6,12 +6,12 @@ __pycache__/
 *.sqlite3
 
 # Virtual environment
+venv/
 
 # Django
 db.sqlite3
 *.log
 *.pot
-*.pyc
 
 # React / Node
 node_modules/
