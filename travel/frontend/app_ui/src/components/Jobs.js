@@ -78,7 +78,7 @@ export default function Jobs(){
                 {/* { (click&&isApplied)  && <p >Already Applied.</p> } */}
                <button className={isApplied ? styles.appliedBtn : styles.applyBtn} onClick={() => !isApplied && applyForJobs(job.id)} disabled = {isApplied}>{isApplied ? "Applied" : "Apply" }</button>
             </li>
-            )})
+            ) })
 }     
         </ul>
         </div>        

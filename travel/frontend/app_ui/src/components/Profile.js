@@ -9,44 +9,45 @@ axios.defaults.withCredentials = true;
 export default function Profile() {
   const [data, setData] = useState({});
   const [bio, setBio] = useState('');
-  const [file, setFile] = useState(null); // local file for upload
-  const [preview, setPreview] = useState(null); // preview before upload
-  const [profilePic, setProfilePic] = useState(null); // uploaded image URL from backend
+  const [file, setFile] = useState(null); 
+  const [preview, setPreview] = useState(null); 
+  const [profilePic, setProfilePic] = useState(null); 
 
-  // handle file selection
+
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
     setFile(selected);
 
     if (selected) {
-      setPreview(URL.createObjectURL(selected)); // local preview
+      setPreview(URL.createObjectURL(selected));
     }
   };
 
   // fetch user data
-const fetch_users = async () => {
+const fetch_user = async () => {
     try {
       const res = await axios.get("http://127.0.0.1:8000/user/");
       setData(res.data.user);
-      setBio(res.data.bio)
+      setBio(res.data.profile[0].bio)
+      setProfilePic(res.data.profile[0].pic)
       if (res.data.profile_pic) {
         console.log("profile already set")
-        setProfilePic(res.data.profile_pic); // set from backend
+        setProfilePic(res.data.profile_pic); 
       }
+      
     } catch (error) {
       console.log("error", error);
     }
   };
 
   useEffect(() => {
-    fetch_users();
+    fetch_user();
   }, []);
 
   // upload file
   const handleUpload = async () => {
     await getCSRFToken();
     const csrfToken = Cookies.get("csrftoken");
-    console.log("csrfff :", csrfToken);
 
     if (!file) {
       alert("Please select an image first");
@@ -65,8 +66,8 @@ const fetch_users = async () => {
         withCredentials: true,
       });
 
-      console.log("Upload success:", res.data);
-      setProfilePic(res.data.profile_pic); // update with uploaded pic path
+  
+      setProfilePic(res.data.profile); // update with uploaded pic path
       alert("Profile picture uploaded!");
     } catch (err) {
       console.error("Upload failed:", err);
@@ -102,8 +103,9 @@ const fetch_users = async () => {
     <div className={styles.profDiv}>
       {/* Profile Picture Section */}
 <div style={{ textAlign: "center", marginBottom: "20px" }}>
+
   <img
-    src={preview ? preview : profilePic ? `http://127.0.0.1:8000${profilePic}` : upload}
+    src={ `http://127.0.0.1:8000/media/${profilePic}` }
     alt="Profile"
     style={{
       width: "120px",

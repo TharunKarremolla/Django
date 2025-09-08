@@ -1,4 +1,40 @@
 .divs{
     width: 500px;
-    margin: 100px auto; 
+    margin: 10px auto; 
+   
+}
+
+.loading{
+       color: #0077B5;
+}
+.PostCard{
+    width: 500px;
+    height: 600px;
+    background-color: #FFFFFF;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.profile{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    /* objectFit: cover; */
+    border: 2px solid #ddd;
+    margin: 10px 20px 0 10px;
+}
+
+span{
+    font-size: 25px;
+}
+
+.profileCard{
+    display: flex;
+    align-items: center;
+}
+
+.image{
+    width: 500px;
+    height: 400px;
+
 }

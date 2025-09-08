@@ -11,6 +11,7 @@ import Layout from './components/Layout';
 import Profile from './components/Profile';
 import Inbox from './components/Inbox';
 import Message from './components/Message';
+import Post from './components/Post';
 
 function App() {
  
@@ -81,8 +82,15 @@ function App() {
               </Layout>
             </ProtectedRoute>}>          
           </Route>
-         </Routes>
-       
+        
+        <Route path="/Post"  element = {
+          <ProtectedRoute>
+            <Layout>
+              <Post />  
+            </Layout>
+          </ProtectedRoute>}>          
+        </Route>  
+        </Routes>
       </Router>
      </div>
    

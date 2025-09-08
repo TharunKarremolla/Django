@@ -30,7 +30,7 @@ export default function Login({children}){
             }
         catch(error){
               setError(error.response.data.error)
-            console.log("error : ",Error)
+            console.log("error : ",error)
         }
     }
 

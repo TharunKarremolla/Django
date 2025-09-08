@@ -13,14 +13,14 @@ class Jobs(models.Model):
     posted_by = models.ForeignKey(User,on_delete=models.CASCADE,related_name="job", default=1)
 
 class Application(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="user_id")
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="applications")
     job = models.ForeignKey(Jobs,on_delete=models.CASCADE,related_name="job_id")
     applied_on = models.DateTimeField(auto_now_add=True)
     
 
 class Profile(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='user')
-    pic = models.ImageField(upload_to='profile_pics/',blank=True,null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    pic = models.ImageField(upload_to='profile_pics/',blank=True,null=True,default='defaults/defaultProfile.png')
     bio = models.TextField(blank=True,null=True)
 
 
@@ -30,3 +30,9 @@ class Messages(models.Model):
     message = models.CharField()
     timestamp = models.DateTimeField(auto_now_add = True)
 
+
+class Posts(models.Model):
+    created_by = models.ForeignKey(User,on_delete=models.CASCADE,related_name='created_by')
+    created_at = models.DateTimeField(auto_now_add=True)
+    feed = models.ImageField(upload_to='feed/',blank=True,null=True)
+    caption = models.CharField(default='')

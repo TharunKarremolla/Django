@@ -70,10 +70,10 @@ export default function Account({ children }){
                 <div className={styles.checkbox}>
                 
                     <label>Recruiter</label>
-                    <input  className={styles.check} type="checkbox"  onClick={(e) =>setRecruiter(e.target.checked) }></input><br></br>
+                    <input  className={styles.check} type="checkbox"  onChange={(e) =>setRecruiter(e.target.checked) }></input><br></br>
                 
                 </div>
-                <button className={styles.submitBtn} onClick={handSubmit}>Submit</button>
+                <button className={styles.submitBtn} onClick={handSubmit} disabled={!username || !email || !password}>Submit</button>
             </div>
         
        

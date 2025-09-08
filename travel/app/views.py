@@ -12,9 +12,41 @@ from rest_framework.decorators import api_view
 import json
 from django.views.decorators.csrf import csrf_protect
 from django.http import JsonResponse, HttpResponse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.views.decorators.csrf import csrf_exempt
-from .models import Jobs,Application,Profile,Messages
-from django.utils import timezone
+from .models import Jobs,Application,Profile,Messages,Posts
+
+
+def get_posts(request):
+    posts = Posts.objects.select_related('created_by').order_by('created_at')
+
+    result = []
+    for post in posts:
+        profile = Profile.objects.filter(user_id = post.created_by).first()
+
+        result.append({
+            'id' : post.id,
+            'caption' : post.caption,
+            'feed' : post.feed.url if post.feed else None,
+            'username' : post.created_by.username ,
+            'profile_pic' : profile.pic.url if profile else 'media/defaults/defaultProfile.png',
+            'bio' : profile.bio if profile else ''
+
+        })
+    return JsonResponse({'posts' : result},safe=False)
+
+
+def Create_post(request):
+    if request.method == 'POST':
+       
+        picture = request.FILES.get('Picture')
+        caption = request.POST.get('Caption')
+        post = Posts.objects.create(feed = picture,caption= caption,created_by_id = request.user.id)
+        post.save()
+           
+    return JsonResponse({'message' : 'request reached'})
+
 
 def display_Msgs(request):
     receiver = request.GET.get('receiver')
@@ -47,7 +79,6 @@ def addBio(request):
 
 @csrf_protect
 def upload_profile(request):
-    print("hello")
     if request.method == 'POST' and request.FILES.get('profilePic'):
         
         profile, created = Profile.objects.get_or_create(user = request.user)
@@ -63,12 +94,11 @@ def fetch_user(request):
     try :
         requested_user = request.user 
         user =  User.objects.filter(id = requested_user.id).values().first()
-        profile = Profile.objects.filter(user_id = requested_user.id).first()
-        print(profile)
-        profile_pic_url = profile.pic.url if profile.pic else None
-        return JsonResponse({"user" : user,"profile_pic": profile_pic_url,"bio" : profile.bio})
+        profile = list(Profile.objects.filter(user_id = requested_user.id).values())
+        print('profile :',profile)
+        return JsonResponse({"user" : user,"profile": profile})
     except:
-        return JsonResponse({"error" : "User not found"},status=404)
+        return JsonResponse({"error" : "User not found1"},status=404)
 
 def appied_Jobs(request):
     user = User.objects.get(username = request.user)
@@ -126,20 +156,31 @@ def new_job(request):
 def create_account(request):
     print(request.body.decode())
     if request.method == 'POST':
-         
-        try :
-            data = json.loads(request.body)
-            username = data.get("username")
-            email = data.get("email")
-            password = data.get("password")
-            is_recruiter = data.get("is_recruiter")
-            print(type(is_recruiter))
-            user = User.objects.create_user(username=username,email=email,password=password)
-            user.is_superuser = is_recruiter
-            user.save()
-        except:
+
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+        except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)
          
+        
+        username = data.get("username")
+        email = data.get("email")
+        password = data.get("password")
+        is_recruiter = data.get("is_recruiter")
+    
+       
+        if not username or not email or not password:
+            return JsonResponse({"error": "Missing fields"}, status=400)
+
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({"error": "Username already exists"}, status=400)
+        
+        user = User.objects.create_user(username=username,email=email,password=password)
+        user.is_staff = is_recruiter
+        user.save()
+
+        from app.models import Profile
+        Profile.objects.get_or_create(user=user)
     return JsonResponse({'message': 'account created successfully'})
 
 @api_view(["GET"])

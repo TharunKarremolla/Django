@@ -32,7 +32,7 @@ export default function ProtectedRoute({ children }) {
   }, []);
 
   if (authData.isAuth === null) {
-    return <h2>Checking authentication...</h2>; // loading screen
+    return <h1 style={{ 'color': '#0077B5','marginLeft' : '43%', 'marginTop' : '20%'}}>LinkedIn...</h1>; // loading screen
   }
 
   return authData.isAuth ? React.cloneElement(children, {user : authData.user }) : <Navigate to="/Login" replace />;
