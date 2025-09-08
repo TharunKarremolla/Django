@@ -89,10 +89,10 @@ export default function Message() {
 
           }
 
-          {/* <div className={styles.sendDiv}> */}
+          <div className={styles.sendDiv}>
           <input className={styles.inputmsg} type="text"  placeholder="send message" value={message} onChange={(e) => setMessage(e.target.value)} />
           <button  className={styles.sendButton} onClick={() => {handleSend(user.id); display_Msgs(user.id); }}>Send</button>
-          {/* </div> */}
+          </div>
     </div>
     )
 }

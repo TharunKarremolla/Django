@@ -1,10 +1,10 @@
 .msgsDiv{
     width: 600px;
-    height: 600px;
-    margin: 50px auto;
-    border: 1px solid gray;
+    height: 500px;
+    margin: 0px auto;
     border-radius: 5px;
-    /* padding: 10px; */
+   background-color: #FFFFFF;
+   text-align: center;
 }
 
 .sender{
@@ -32,18 +32,14 @@
 }
 
 .sendDiv{
-    display: flex;
-    justify-content: center;
-
+    bottom: 0;
+    position: fixed;
 }
 
-
-
 .sendButton{
-
- font-size: 14px; 
-  background-color: rgb(64, 121, 226); 
-     color: white;
+    font-size: 14px; 
+    background-color: rgb(64, 121, 226); 
+    color: white;
     border: none;
     padding: 13px 30px;
     border-radius: 5px;
@@ -59,7 +55,7 @@
 
 .inputmsg{
     font-size: 15px;
-    
+    width: 100%;
     border-radius: 5px 0px 0px 5px;
 }
 

@@ -1,13 +1,16 @@
 body{
-    margin: 0;
+  margin-top: 100px;
 }
 
 .navbar{    
-    /* background-color: rgb(70, 70, 193); */
+    background-color: #FFFFFF;
     font-size: 17px;     
     display: flex;
     justify-content: space-between;
     align-items: center;
+    top : 0;
+    width: 100%;
+    position: fixed;
 }
 
 .appname{
@@ -25,4 +28,15 @@ img{
 .logout{
     color :  #0077B5;
     margin-right: 10px;
+}
+
+
+.links{
+    display: flex;
+    width: 35%;
+    justify-content: space-around;
+     
+    padding: 10px;
+   
+    
 }

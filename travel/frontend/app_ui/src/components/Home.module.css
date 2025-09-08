@@ -1,37 +1,4 @@
-.home_page{
-    text-align: center;
-}
-
 .divs{
-    display: flex;
-    width: 100%; 
-    height: 100vh;
+    width: 500px;
+    margin: 100px auto; 
 }
-
-
-
-.leftdiv{
-    flex: 6; 
-    padding: 20px;
-    box-sizing: border-box; 
-    /* background: lightblue; */
-}
-.rightdiv {
-    flex: 4;
-    padding: 20px;
-    box-sizing: border-box; 
-    background: lightgreen;
-
-        }
-.links{
-    display: flex;
-    width: 35%;
-    justify-content: space-around;
-    position: fixed;   
-    bottom: 0px;            
-    height: 50px;    
-    padding: 10px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.3);
-    
-}
-

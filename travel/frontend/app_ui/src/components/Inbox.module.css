@@ -1,4 +1,9 @@
-
+.inboxDiv{
+    width: 500px;
+    height: fit-content;
+    margin: 100px auto; 
+    background-color: #FFFFFF;
+}
 .links{
     color: black;
     text-decoration: none;
