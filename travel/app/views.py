@@ -15,26 +15,31 @@ from django.http import JsonResponse, HttpResponse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.views.decorators.csrf import csrf_exempt
-from .models import Jobs,Application,Profile,Messages,Posts
+from .models import Jobs,Application,Profile,Messages,Posts,CustomUserCreationForm
+from datetime import datetime
+import re 
 
 
 def get_posts(request):
     posts = Posts.objects.select_related('created_by').order_by('created_at')
-
+    current_user = list(Profile.objects.filter(user_id = request.user.id).values())
+    
     result = []
     for post in posts:
         profile = Profile.objects.filter(user_id = post.created_by).first()
-
+        date_only = post.created_at.strftime("%Y-%m-%d %H:%M:%S")
+        
         result.append({
             'id' : post.id,
             'caption' : post.caption,
             'feed' : post.feed.url if post.feed else None,
+            'created_at' : date_only,
             'username' : post.created_by.username ,
             'profile_pic' : profile.pic.url if profile else 'media/defaults/defaultProfile.png',
             'bio' : profile.bio if profile else ''
 
         })
-    return JsonResponse({'posts' : result},safe=False)
+    return JsonResponse({'posts' : result,'current_user' : current_user},safe=False)
 
 
 def Create_post(request):
@@ -154,23 +159,33 @@ def new_job(request):
 
 @csrf_protect
 def create_account(request):
-    print(request.body.decode())
     if request.method == 'POST':
 
         try:
             data = json.loads(request.body.decode('utf-8'))
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)
-         
-        
         username = data.get("username")
         email = data.get("email")
         password = data.get("password")
         is_recruiter = data.get("is_recruiter")
     
        
-        if not username or not email or not password:
-            return JsonResponse({"error": "Missing fields"}, status=400)
+        if not username or len(username)<5:
+            return JsonResponse({"NameError": "Username must contain atleast 5 letters"}, status=400)
+        
+        
+        if not email or len(email)<8 :
+            return JsonResponse({"EmailError": "email must contain atleast 8 letters"}, status=400)
+    
+        valid = re.fullmatch(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email)
+
+        if  valid is  None:
+            return JsonResponse({'EmailError' : 'Invalid Email Address'},status=400)
+
+        if not password or len(password)<5:
+            return JsonResponse({"PasswordError": "Password must contain atleast 5 letters"}, status=400)        
+
 
         if User.objects.filter(username=username).exists():
             return JsonResponse({"error": "Username already exists"}, status=400)

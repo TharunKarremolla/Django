@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from django.core.validators import MinLengthValidator
 # Create your models here.
 
 
@@ -36,3 +39,16 @@ class Posts(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     feed = models.ImageField(upload_to='feed/',blank=True,null=True)
     caption = models.CharField(default='')
+
+
+class CustomUserCreationForm(UserCreationForm):
+    username = forms.CharField(
+        max_length = 150,
+        validators = [MinLengthValidator(5)],
+        help_text="Required. Minimum 5 characters.",
+    
+    )
+
+    class Meta: 
+        model = User
+        fields = ("username", "email", "password1", "password2")

@@ -1,3 +1,17 @@
+.mainheader{
+    background-color:  #ffffff;
+    width: 500px;
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.2), 
+            0 2px 3px rgba(0, 0, 0, 0.05);
+    padding-left: 10px;
+}
+
+
 .divs{
     width: 500px;
     margin: 10px auto; 
@@ -13,6 +27,8 @@
     background-color: #FFFFFF;
     margin-bottom: 10px;
     border-radius: 10px;
+    box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.2), 
+            0 2px 3px rgba(0, 0, 0, 0.05);
 }
 
 .profile{
@@ -24,9 +40,7 @@
     margin: 10px 20px 0 10px;
 }
 
-span{
-    font-size: 25px;
-}
+
 
 .profileCard{
     display: flex;
@@ -37,4 +51,34 @@ span{
     width: 500px;
     height: 400px;
 
+}
+
+.postInput{
+    width : 70%;
+    border-radius: 20px;
+    padding: 12px;
+    background-color: transparent;
+    border: 1px solid gray;
+    color: rgb(80, 76, 76);
+    text-align: left;
+    padding-left: 20px;
+}
+
+.icons{
+    border-top: 1px solid rgb(207, 200, 200);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+    align-items: center;
+    font-size: 13px;
+    
+}
+
+.icon{
+    display: flex;
+    align-items: center;
+}
+span{
+    margin-left: -2px;
 }

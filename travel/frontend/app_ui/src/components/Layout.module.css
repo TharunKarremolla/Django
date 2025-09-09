@@ -1,5 +1,5 @@
 body{
-  margin-top: 100px;
+  margin-top: 90px;
 }
 
 .navbar{    
@@ -28,6 +28,7 @@ img{
 .logout{
     color :  #0077B5;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 

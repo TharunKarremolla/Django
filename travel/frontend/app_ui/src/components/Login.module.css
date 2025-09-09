@@ -27,8 +27,9 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: 600;
 }
 
 .submitBtn:hover{
-    background-color: rgb(129, 165, 233);
+    background-color:#004182; 
 }

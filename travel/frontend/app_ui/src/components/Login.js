@@ -45,7 +45,8 @@ export default function Login({children}){
         }catch(error){
             console.log("csrf error" , error)
 
-        }}
+        }
+    }
 
 
     return (
@@ -55,8 +56,9 @@ export default function Login({children}){
                 <h1 className={styles.header}>Login</h1>
                 <input className={styles.inputs} type="text" placeholder="email or username" value={email}  onChange={(e) => setEmail(e.target.value) }/><br/>
                 <input className={styles.inputs} type="password" placeholder="password"  value={password}  onChange={(e) => setPassword(e.target.value) } /><br></br>
-                {Error && <><p>{Error}</p><Link to="/Account">Create Account</Link><br></br></>}
-                <button className = {styles.submitBtn} onClick={handleLogin}>Sign in</button>
+               
+                <button className = {styles.submitBtn} onClick={handleLogin}>Sign in</button><br></br><br></br>
+                <span>Doesn't have Account ?</span>&nbsp;<Link to="/Account">Sign Up</Link>
             </div>
         </div>
     )
