@@ -1,8 +1,12 @@
 .inboxDiv{
-    width: 500px;
+    width: 900px;
     height: fit-content;
     margin: 100px auto; 
     background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.2), 
+            0 2px 3px rgba(0, 0, 0, 0.05);
+    padding: 10px 20px;
 }
 .links{
     color: black;
@@ -10,14 +14,29 @@
 }
 
 .selectUser{
-    border: 1px solid gray;
+    /* border: 1px solid gray;
     padding: 10px 10px;
-    width: 40%;
-    border-radius: 10px;
-    background-color: rgb(252, 247, 253);
+    width: 500px;
+    border-radius: 5px; */
+  display: flex;
+  
+  align-items: center;
+
+  margin-bottom: 20px;
 }
+ .selectUser:hover{
+    background-color: rgb(214, 212, 212);
+ }
 
 .inputname{
-    width: 70%;
+    width: 30%;
 }
 
+
+.nametime{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    
+}

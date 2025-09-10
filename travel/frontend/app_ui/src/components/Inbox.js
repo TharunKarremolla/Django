@@ -8,12 +8,12 @@ export default function Inbox(){
     const [users,setUsers] = useState([])
     const [current_user,setCurrentUser] = useState('')
    
-
+    console.log(search)
     const fetch_users = async() => {
         const res = await axios.get("http://127.0.0.1:8000/all_users/",{params : {search : search}})
             console.log(res.data)        
-        setUsers(res.data.users)
-        setCurrentUser(res.data.current_user)
+         setUsers(res.data.users)
+         setCurrentUser(res.data.current_user)
     }
 
     useEffect (() =>
@@ -28,11 +28,20 @@ export default function Inbox(){
         <div className={styles.inboxDiv}>
             <h1>Messages</h1>
            <input className ={styles.inputname} type="search" placeholder="search..." value={search} onChange={(e) => setSearch(e.target.value)} ></input>
-           <ul>
+           <div>
            {users.map((user) => (
-            <Link className={styles.links} to='/Message' state={{ user : user, current_user : current_user }} key = {user.id}><li key={user.id} className={styles.selectUser}>{capitalize(user.username)}</li></Link>
-          ) )}
-           </ul>
+            <div className={styles.selectUser}>
+            <img style = {{'borderRadius' : '50%', 'marginRight' : '15px'}} src={`http://127.0.0.1:8000/${user.pic}`} width={50}  height={50} />
+            <div className={styles.nametime}>
+            <Link className={styles.links} to='/Message' state={{ user : user, current_user : current_user }} key = {user.id}><strong style = {{'display' : 'inline'}} key={user.id} >{capitalize(user.username)}</strong></Link>
+            <span style={{'fontSize' : '12px'}}>{user.month} {user.day}</span>
+            </div>
+          </div>
+          ) )
+        
+          }
+
+           </div>
             
         </div>
     )

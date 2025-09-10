@@ -1,61 +1,94 @@
-.msgsDiv{
-    width: 600px;
-    height: 500px;
-    margin: 0px auto;
-    border-radius: 5px;
-   background-color: #FFFFFF;
-   text-align: center;
+.msgsDiv {
+  position: relative;
+  width: 900px;
+  height: 600px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.2),
+              0 2px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* prevent input overlapping */
 }
 
-.sender{
-    background-color: rgb(246, 244, 247);
-    border-radius: 5px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: end;
-    padding: 5px 10px 5px 0;
-    margin-left: 60%;
-    
+/* Scrollable message list */
+ul {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 👈 make children start from left by default */
+  padding: 15px;
+  margin: 0;
+  list-style: none;
 }
 
-.receiver{
-   background-color: rgb(246, 244, 247);
-    border-radius: 5px;
-    margin-bottom: 10px;
-    margin-right: 60%;
-    padding: 5px 0 5px 10px;
-}
-.time{
-    font-size: 13px;
-    display: flex;
-    justify-content: center;
-}
-
-.sendDiv{
-    bottom: 0;
-    position: fixed;
+/* Sent messages (right side) */
+.sender {
+  background-color: #e6f0ff;
+  border-radius: 15px 15px 0 15px;
+  margin: 5px 0;
+  padding: 8px 12px;
+  max-width: 60%;
+  align-self: flex-end; /* 👈 push to the right */
+  word-wrap: break-word;
+  text-align: left;
 }
 
-.sendButton{
-    font-size: 14px; 
-    background-color: rgb(64, 121, 226); 
-    color: white;
-    border: none;
-    padding: 13px 30px;
-    border-radius: 5px;
-    font-size: 12px;
-    cursor: pointer;
-    margin-left: -2px; margin: 10px auto;
+/* Received messages (left side) */
+.receiver {
+  background-color: #f1f1f1;
+  border-radius: 15px 15px 15px 0;
+  margin: 5px 0;
+  padding: 8px 12px;
+  max-width: 60%;
+  align-self: flex-start; /* 👈 push to the left */
+  word-wrap: break-word;
+  text-align: left;
 }
 
-
-.sendButton:hover{
-    background-color:  rgb(138, 172, 235);
+/* Timestamp */
+.time {
+  font-size: 12px;
+  color: #777;
+  margin: 2px 0;
+  display: flex;
+  justify-content: center;
 }
 
-.inputmsg{
-    font-size: 15px;
-    width: 100%;
-    border-radius: 5px 0px 0px 5px;
+/* Input area */
+.sendDiv {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
 }
 
+/* Input field */
+.inputmsg {
+  flex: 1;
+  font-size: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  margin-right: 10px;
+}
+
+/* Send button */
+.sendButton {
+  background-color: rgb(64, 121, 226);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sendButton:hover {
+  background-color: rgb(138, 172, 235);
+}

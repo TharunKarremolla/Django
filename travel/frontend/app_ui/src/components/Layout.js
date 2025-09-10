@@ -12,7 +12,7 @@ import suitcase from './suitcase.png';
 
 
 export default function Layout( {children , user}){
-
+   
     const navigate = useNavigate()
  const handleLogout = async () => {
 
@@ -42,7 +42,7 @@ export default function Layout( {children , user}){
                  <div className={styles.links}>
                                 <Link to="/home"><img src={home} alt="home icon" width="30" /></Link>
                                 <Link to="/Jobs"><img src={suitcase} alt="jobs icon" width="30" /></Link>       
-                                <Link to="/New_job"><img src={add} alt="add icon" width="30" /></Link>  
+                             {user.is_staff && <Link to="/New_job"><img src={add} alt="add icon" width="30" /></Link>  }
                                 <Link to="/Profile"><img src={profile} alt="profile icon" width="30" /></Link>  
                                 <Link to='/Inbox' ><img src={chat} alt="chat icon" width={30} /></Link>
                               </div>
@@ -52,7 +52,7 @@ export default function Layout( {children , user}){
                
             </nav>
           
-            {React.cloneElement(children , {user})}
+            {React.cloneElement(children , {user})}  
         </div>
     )
 }

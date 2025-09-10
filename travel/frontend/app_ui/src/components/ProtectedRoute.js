@@ -17,11 +17,11 @@ export default function ProtectedRoute({ children }) {
         );
 
         if (res.data.authenticated) {
-          setAuthData({isAuth : true, user : res.data.username});
+          setAuthData({isAuth : true, user : res.data.user});
           console.log("Verify response1:",  res.data);
 
         } else {
-          setAuthData({isAuth : false, user : res.data.username});
+          setAuthData({isAuth : false, user : res.data});
         }
       } catch (error) {
         setAuthData({isAuth : false, user : null}); // 401 or network error → not authenticated

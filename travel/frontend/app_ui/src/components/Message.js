@@ -3,12 +3,14 @@ import { useState,useEffect } from "react";
 import styles from "./Message.module.css";
 import Cookies from 'js-cookie';
 import axios from "axios";
+import { useRef } from "react";
 
 export default function Message() {
     const [message,setMessage] = useState('')
     const location = useLocation();
     const { user,current_user } = location.state || {};
     const [old_msgs,setOldMsgs] = useState([])
+    console.log(user,current_user)
    
 
     const display_Msgs = async() => {
@@ -63,13 +65,18 @@ export default function Message() {
             setMessage(e.target.value)
 
         }
+        const messagesEndRef = useRef(null);
+
+useEffect(() => {
+  messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+}, [old_msgs]);
 
     return (
     <div className={styles.msgsDiv}>
-        <h1>Messages</h1>
+     
         {user ? (
             <>
-            <h2>{user.username}</h2>
+            <h2 style = {{'padding':'30px'}}>{user.username}</h2>
             <h2>{user.bio}</h2>
             </> ) : (
                 <>

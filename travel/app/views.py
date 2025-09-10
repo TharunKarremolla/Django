@@ -19,6 +19,11 @@ from .models import Jobs,Application,Profile,Messages,Posts,CustomUserCreationFo
 from datetime import datetime
 import re 
 
+def func():
+    messages = Messages.objects.select_related('sender').all()
+    print(messages)
+func()
+
 
 def get_posts(request):
     posts = Posts.objects.select_related('created_by').order_by('created_at')
@@ -62,6 +67,7 @@ def display_Msgs(request):
 
 def send_message(request):
     data = json.loads(request.body)
+    print('body' , data)
     receiver = data.get('receiver')
     message = data.get('message')
     message = Messages(sender_id = request.user.id,receiver_id = receiver,message = message)
@@ -71,8 +77,31 @@ def send_message(request):
 
 def fetch_all_users(request):
     search = request.GET.get('search')
-    users = list(User.objects.filter(username__icontains= search).values())
-    return JsonResponse({"users" : users,'current_user' : request.user.id})
+    profiles = Profile.objects.select_related('user').filter(user__username__icontains= search)
+    
+   
+    result = []
+
+    for profile in profiles:
+        message = (Messages.objects.filter(sender_id = profile.user_id).order_by('-timestamp').values().first())
+        
+        if message:
+            dt = message['timestamp']
+            monthname = dt.strftime('%B')[:3]
+            day = dt.day
+           
+        
+        result.append({
+            'id' : profile.user.id,
+            'username' : profile.user.username,
+            'pic' : profile.pic.url,
+            'month' : monthname if monthname is not None else '',
+            'day' : day if day is not None else ''            
+
+        })
+
+    
+    return JsonResponse({"users" : result,'current_user' : request.user.id})
 
 
 def addBio(request):
@@ -201,8 +230,10 @@ def create_account(request):
 @api_view(["GET"])
 def verify(request):
     print("Verify response:", request.user);
+    cur_user = list(User.objects.filter(id = request.user.id).values())
+
     if request.user.is_authenticated:
-        return JsonResponse({"authenticated" : True,"username" : request.user.username})
+        return JsonResponse({"authenticated" : True,"user" :cur_user})
     else:
         return JsonResponse({"authenticated" : False},status=401)        
 
