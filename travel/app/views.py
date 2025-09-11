@@ -18,12 +18,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Jobs,Application,Profile,Messages,Posts,CustomUserCreationForm
 from datetime import datetime
 import re 
-
-def func():
-    messages = Messages.objects.select_related('sender').all()
-    print(messages)
-func()
-
+import random
 
 def get_posts(request):
     posts = Posts.objects.select_related('created_by').order_by('created_at')
@@ -44,6 +39,7 @@ def get_posts(request):
             'bio' : profile.bio if profile else ''
 
         })
+        random.shuffle(result)
     return JsonResponse({'posts' : result,'current_user' : current_user},safe=False)
 
 

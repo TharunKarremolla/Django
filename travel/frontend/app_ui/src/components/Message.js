@@ -10,7 +10,7 @@ export default function Message() {
     const location = useLocation();
     const { user,current_user } = location.state || {};
     const [old_msgs,setOldMsgs] = useState([])
-    console.log(user,current_user)
+    console.log('jasfsfj',user)
    
 
     const display_Msgs = async() => {
@@ -75,26 +75,34 @@ useEffect(() => {
     <div className={styles.msgsDiv}>
      
         {user ? (
-            <>
-            <h2 style = {{'padding':'30px'}}>{user.username}</h2>
-            <h2>{user.bio}</h2>
-            </> ) : (
+            <div className={styles.profile}>
+            <img style = {{'borderRadius':'50%' ,'marginRight' : '20px'}}src={`http://127.0.0.1:8000/${user.pic}`} alt="profile" width={60} height={60}/>
+            <h2 style = {{'padding':'0px'}}>{user.username}</h2>
+            </div> ) : (
                 <>
                 <p>No user data</p>
                 </>
             )
           }
 
-          {old_msgs && <ul>{old_msgs.map((msg) => (
-            <div key = {msg.id} >
-                <li className={styles.time}>{msg.timestamp.slice(11,16)}</li>
-            <li className={`${current_user === msg.sender_id ? styles.sender : styles.receiver}`}>{msg.message}</li>
-            
-            
-            </div>
-          ))}</ul>
+       <ul>
+  {old_msgs.map((msg) => {
+    const isSender = current_user === msg.sender_id;
+    return (
+      <div 
+        key={msg.id} 
+        className={`${styles.messageRow} ${isSender ? styles.senderRow : styles.receiverRow}`}
+      >
+        <li className={isSender ? styles.sender : styles.receiver}>
+          {msg.message}
+          <div className={styles.time}>{msg.timestamp.slice(11, 16)}</div>
+        </li>
+      </div>
+    );
+  })}
+  <div ref={messagesEndRef}></div>
+</ul>
 
-          }
 
           <div className={styles.sendDiv}>
           <input className={styles.inputmsg} type="text"  placeholder="send message" value={message} onChange={(e) => setMessage(e.target.value)} />

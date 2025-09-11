@@ -29,7 +29,7 @@ export default function Login({children}){
                 navigate("/Home")
             }
         catch(error){
-              setError(error.response.data.error)
+              setError(error)
             console.log("error : ",error)
         }
     }

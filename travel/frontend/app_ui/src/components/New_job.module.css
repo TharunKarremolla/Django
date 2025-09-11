@@ -6,11 +6,16 @@ body {
 .container{
     width : 400px;
     margin: 30px auto;
-    
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px;
+       box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.2), 
+            0 2px 3px rgba(0, 0, 0, 0.05);
 }
 
 .inputs{
     width: 70%;
+    margin-bottom: 20px;
 }
 
 button{

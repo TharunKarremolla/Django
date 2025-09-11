@@ -1,26 +1,26 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useState, useEffect, use } from "react";
-import styles from './Post.module.css';
+import imageicon from './imageicon.png';
+
 
 export default function Post(){
-    const [created_at,setCreatedAt] = useState('')
     const [feed,setFeed] = useState('')
-    const [created_by_id,setCreatedById] = useState('')
     const [caption,setCaption] = useState('')
 
+
     const handleFileChange = (e) => {
-  setFeed(e.target.files[0]); // actual File object
+  setFeed(e.target.files[0]); 
 };
 
-    const create_post = async() =>{
+    const handleSubmit = async() =>{
     await getCSRFToken();
     const csrfToken = Cookies.get('csrftoken')
 
-      if (!feed) {
-      alert("Please select an image first");
-      return;
-    }
+    //   if (!feed) {
+    //   alert("Please select an image first");
+    //   return;
+    // }
 
      const formData = new FormData();
     formData.append("Picture", feed);
@@ -34,7 +34,8 @@ export default function Post(){
         },
         withCredentials: true,
       });
-     console.log(res.data)
+        setCaption('')
+     
   }catch(error){
     console.log('error : ',error)
   }
@@ -50,13 +51,86 @@ export default function Post(){
           console.log(error)
       }
   }
-    return (
-        <div>
-        <h1>Create Post</h1>
-        <input className={styles.inputs} type="file" placeholder=""   onChange={handleFileChange}/><br/>
-        <input className={styles.inputs} type="text" placeholder="caption"  value={caption}  onChange={(e) => setCaption(e.target.value) } /><br></br>    
-       <button onClick={create_post}>Post</button>
-        </div>
+    return (       
+         <div
+           style={{
+             position: "fixed",
+             top: "0",
+             left: "0",
+             width: "100%",
+             height: "100%",
+            backgroundColor: "rgba(0,0,0,0.6)",
+             display: "flex",
+            justifyContent: "center",
+             alignItems: "center",
+             zIndex: 1000,
+           }}
+         >
+           <div
+             style={{
+               width: "500px",
+               background: "white",
+               borderRadius: "10px",
+               padding: "20px",
+              display: "flex",
+               flexDirection: "column",
+            }}
+           >
+            <h3>Create a post</h3>
+             <textarea
+               rows="6"
+               value={caption}
+              onChange={(e) => setCaption(e.target.value)}
+               placeholder="What do you want to talk about?"
+               style={{
+                 marginTop: "10px",
+                 padding: "10px",
+                borderRadius: "8px",
+                 border: "1px solid #ccc",
+                 resize: "none",
+              }}
+             />
+             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "15px" }}>
+              <div>
+              <label htmlFor="file-upload"  style={{ cursor: "pointer" }}>
+                <img src = {imageicon} width={40} alt="Upload" style={{ width: "30px", height: "30px" }}/>
+              </label>
+              <input type="file" id='file-upload'  style={{ display: "none" }}  onChange={handleFileChange}/>
+
+               {/* <div style={{ marginTop: "10px" }}>
+          <img src={feed.name} alt="Preview" style={{ width: "100px", borderRadius: "8px" }} />
+        </div> */}
+              </div>
+               <button
+                 // onClick={handleClose}
+                style={{
+                  marginRight: "10px",
+                   padding: "8px 14px",
+                   borderRadius: "6px",
+                   border: "none",
+                   background: "#eee",
+                   cursor: "pointer",
+                 }}
+              >
+                 Cancel
+               </button>
+               <button
+                 onClick={handleSubmit}
+                 style={{
+                   padding: "8px 14px",
+                   borderRadius: "6px",
+                  border: "none",
+                   background: "#0a66c2",
+                   color: "white",
+                   cursor: "pointer",
+                 }}
+               >
+                 Post
+               </button>
+             </div>
+           </div>
+         </div>
+       
 
     )
 }
