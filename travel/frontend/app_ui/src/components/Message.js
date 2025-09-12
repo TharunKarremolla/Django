@@ -10,8 +10,8 @@ export default function Message() {
     const location = useLocation();
     const { user,current_user } = location.state || {};
     const [old_msgs,setOldMsgs] = useState([])
-    console.log('jasfsfj',user)
-   
+    
+    
 
     const display_Msgs = async() => {
         const res = await axios.get('http://127.0.0.1:8000/display_Msgs/',{ params : {receiver : user.id}})

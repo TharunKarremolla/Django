@@ -120,7 +120,6 @@ def upload_profile(request):
     return JsonResponse({'error' : 'No file uploaded'},status = 400)
 
 def fetch_user(request):
-    print(request.user)
     try :
         requested_user = request.user 
         user =  User.objects.filter(id = requested_user.id).values().first()
@@ -137,21 +136,31 @@ def appied_Jobs(request):
 
 
 def apply(request):
-    print("Raw Body " ,request.body.decode())
-    user = User.objects.get(username = request.user)
-    data = json.loads(request.body)
-    job_id = data.get('jobId')
-    apply = Application(job_id=job_id,user_id = user.id)
-    apply.save()
-    applied = list(Application.objects.filter(user_id = user.id).values())
-    return JsonResponse({"applied" : applied,"jobId" : job_id})
+    try:
+        user = User.objects.get(username = request.user)
+        data = json.loads(request.body)
+        job_id = data.get('jobId')
+        apply = Application(job_id=job_id,user_id = user.id)
+        apply.save()
+       
+        applied = Application.objects.filter(user_id = user.id).values().exists()
+        return JsonResponse({"applied" : applied,"jobId" : job_id})
+    except:
+        return JsonResponse({'message' : 'Already applied'},status=404)
 
 
 def fetch_jobs(request):
+    job_id = request.GET.get('jobid')
+    is_applied = False
     try :
+            
+        if job_id:
+            jobs = list(Jobs.objects.filter(id = job_id).values())
+            is_applied = Application.objects.filter(job_id = job_id).exists()
+        else:
             jobs = list(Jobs.objects.all().values())
             
-            return JsonResponse({"jobs" : jobs})
+        return JsonResponse({"jobs" : jobs,'is_applied' : is_applied})
     except :
         return JsonResponse({"error" : "sdjfnas"},status = 400)
 
@@ -161,9 +170,8 @@ def new_job(request):
         print(request.body.decode())
         if request.user.is_authenticated:
             user = User.objects.get(username = request.user.username)
-            if user.is_superuser:
-                print("super user")
-        
+            if user.is_staff:
+              
                 try:
                     
                     data = json.loads(request.body)

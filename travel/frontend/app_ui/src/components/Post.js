@@ -76,7 +76,8 @@ export default function Post(){
                flexDirection: "column",
             }}
            >
-            <h3>Create a post</h3>
+            <h3>Create a post  </h3>
+            
              <textarea
                rows="6"
                value={caption}
@@ -101,6 +102,7 @@ export default function Post(){
           <img src={feed.name} alt="Preview" style={{ width: "100px", borderRadius: "8px" }} />
         </div> */}
               </div>
+             
                <button
                  // onClick={handleClose}
                 style={{

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import upload from './upload.png';
 import styles from './profile.module.css';
 import Cookies from 'js-cookie';
+import edit from './edit.png'
 
 axios.defaults.withCredentials = true;
 
@@ -108,8 +109,8 @@ const fetch_user = async () => {
     src={ `http://127.0.0.1:8000/media/${profilePic}` }
     alt="Profile"
     style={{
-      width: "120px",
-      height: "120px",
+      width: "150px",
+      height: "150px",
       borderRadius: "50%",
       objectFit: "cover",
       border: "2px solid #ddd"
@@ -129,10 +130,12 @@ const fetch_user = async () => {
         onChange={(e) => setBio(e.target.value)}
       />
       <br />
-      <button onClick={addBio}>Edit Bio</button>
+      <button onClick={addBio} className={styles.editBtn}>Edit Bio</button>
       <br />
-
-      <input type="file" onChange={handleFileChange} />
+    <label htmlFor="upload" style={{cursor : 'pointer'}} >
+      <img src={edit} width={60} alt="Upload"></img>
+      </label>
+      <input type="file" id='upload' onChange={handleFileChange} style={{ display : 'none'}} />
       <br />
       <button onClick={handleUpload}>Save</button>
     </div>

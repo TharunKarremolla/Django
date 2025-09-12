@@ -9,7 +9,7 @@ from django.core.validators import MinLengthValidator
 
 class Jobs(models.Model):
     title = models.CharField(max_length=100)
-    description =  models.CharField(max_length=200)
+    description =  models.CharField(max_length=2000)
     company =  models.CharField(max_length=100)
     salary =  models.IntegerField()
     location = models.CharField(max_length=100)
@@ -19,6 +19,9 @@ class Application(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="applications")
     job = models.ForeignKey(Jobs,on_delete=models.CASCADE,related_name="job_id")
     applied_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("user", "job") 
     
 
 class Profile(models.Model):

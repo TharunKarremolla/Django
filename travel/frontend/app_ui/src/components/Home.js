@@ -25,6 +25,10 @@ useEffect(() => {
   getPosts();
 },[])
 
+const handleBack = () => {
+  console.log("ajsfdj")
+}
+
   if (!user) {
     return <h1 className={styles.loading}>LinkedIn</h1>;
   }
@@ -38,8 +42,8 @@ useEffect(() => {
             <button className={styles.postInput} onClick={() => setShow(true)}><strong>Start a post</strong></button>
       
        
-     {show &&  <Post />}
-
+     {show &&  <><Post /></>}
+      
 
         </div>
       <div className={styles.divs}>

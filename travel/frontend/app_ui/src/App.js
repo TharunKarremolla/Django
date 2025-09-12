@@ -12,6 +12,7 @@ import Profile from './components/Profile';
 import Inbox from './components/Inbox';
 import Message from './components/Message';
 import Post from './components/Post';
+import JobDetails from './components/JobDetails';
 
 function App() {
  
@@ -90,6 +91,16 @@ function App() {
             </Layout>
           </ProtectedRoute>}>          
         </Route>  
+
+          
+        <Route path="/JobDetails"  element = {
+          <ProtectedRoute>
+            <Layout>
+              <JobDetails />  
+            </Layout>
+          </ProtectedRoute>}>          
+        </Route> 
+
         </Routes>
       </Router>
      </div>

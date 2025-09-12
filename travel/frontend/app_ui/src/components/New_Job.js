@@ -12,6 +12,7 @@ export default function New_Job(){
     const [Location,setLocation] = useState('')
     const [Error,setError] = useState('')
     const navigate  = useNavigate()
+ 
    
     const Post_job = async () => {
         await get_csrf()
@@ -28,8 +29,7 @@ export default function New_Job(){
             console.log("res",res.data)
             navigate("/Jobs")
     }catch(error){
-        setError(error.response.data.message)
-
+        
         console.log(Error)
     }}
 
@@ -55,11 +55,21 @@ export default function New_Job(){
             <h1>Post New Job</h1>
             <input className={styles.inputs} type="text" placeholder="Title" value={Title}  onChange={(e) => setTitle(e.target.value) }/><br/>
             <input className={styles.inputs} type="text" placeholder="Company"  value={Company}  onChange={(e) => setCompany(e.target.value) } /><br></br>
-             <input className={styles.inputs} type="text" placeholder="Description" value={Description}  onChange={(e) => setDescription(e.target.value) }/><br/>
+             
             <input className={styles.inputs} type="text" placeholder="Salary"  value={Salary}  onChange={(e) => setSalary(e.target.value) } /><br></br>
              <input className={styles.inputs} type="text" placeholder="Location" value={Location}  onChange={(e) => setLocation(e.target.value) }/><br/>
+             {/* <input className={styles.inputs} type="text"  /><br/> */}
+             <textarea rows={6} onChange={(e) => setDescription(e.target.value) } placeholder="Description" value={Description} 
+                 style={{
+                 margin: "8px 0",
+                 padding: "10px",
+                borderRadius: "8px",
+                 border: "1px solid #ccc",
+                 resize: "none",
+                 width : '73%'
+              }}></textarea>
            {Error && <p className={styles.errors}>{Error}</p>}
-            <button onClick={Post_job}>Post Job</button>
+            <button onClick={Post_job} className={styles.PostBtn}>Post Job</button>
         </div>
     )
 }
