@@ -15,7 +15,7 @@ export default function Home( {user}) {
 
 
 const getPosts = async() => {
-  const res = await axios.get('http://127.0.0.1:8000/get_posts/')
+  const res = await axios.get('https://django-6-0st0.onrender.com/get_posts/')
 setPosts(res.data.posts)
 setCurrentUser(res.data.current_user)
 
