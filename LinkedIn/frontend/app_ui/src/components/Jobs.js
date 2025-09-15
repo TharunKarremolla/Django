@@ -8,7 +8,7 @@ export default function Jobs(){
     const [JobId,setJobID] = useState(null)
     
     const fetch_jobs = async () =>{
-        const res = await axios.get("http://127.0.0.1:8000/fetch_jobs") 
+        const res = await axios.get("https://django-6-0st0.onrender.com/fetch_jobs") 
         setJobs(res.data.jobs)
     }
 
