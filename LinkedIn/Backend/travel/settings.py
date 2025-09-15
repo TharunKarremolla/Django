@@ -19,7 +19,8 @@ ALLOWED_HOSTS = [
     
     "localhost",
     "127.0.0.1",
-        "django-4-wm3f.onrender.com"
+        "django-4-wm3f.onrender.com",
+      "django-6-gxfn.onrender.com"
 ]
 
 # Application definition
