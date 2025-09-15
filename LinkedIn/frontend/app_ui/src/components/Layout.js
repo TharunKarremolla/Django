@@ -18,7 +18,7 @@ export default function Layout( {children , user}){
 
     try {
            const res = await axios.post(
-        "http://127.0.0.1:8000/logout/",
+        "https://django-6-0st0.onrender.com/logout/",
         {},
         {
           withCredentials: true,
