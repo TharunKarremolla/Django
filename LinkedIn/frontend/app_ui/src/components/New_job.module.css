@@ -1,0 +1,40 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+}
+
+.container{
+    width : 500px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px;
+       box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.2), 
+            0 2px 3px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.inputs{
+    width: 70%;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+.PostBtn{
+      padding: 10px 20px;
+   background-color:  #0a66c2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 20%;
+    margin-top: 10px;
+}
+
+.errors{
+    color: rgb(248, 24, 24);
+}

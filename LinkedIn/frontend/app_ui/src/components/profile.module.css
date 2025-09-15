@@ -1,0 +1,23 @@
+
+
+.profDiv{
+    width: 700px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    height: 500px;
+    box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.2), 
+            0 2px 3px rgba(0, 0, 0, 0.05);
+    padding: 20px;            
+    border-radius: 10px;
+}
+
+input{
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border-radius: 7px;
+    border: 1px solid gray;
+}
+/* 
+.editBtn{
+    
+} */
