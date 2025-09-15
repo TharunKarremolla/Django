@@ -238,7 +238,7 @@ def verify(request):
     cur_user = list(User.objects.filter(id = request.user.id).values())
 
     if request.user.is_authenticated:
-        return JsonResponse({"authenticated" : True,"user" :cur_user})
+        return JsonResponse({"authenticated" : True,"user" :cur_user,'message':'if block'})
     else:
         return JsonResponse({"authenticated" : False},status=401)        
 
