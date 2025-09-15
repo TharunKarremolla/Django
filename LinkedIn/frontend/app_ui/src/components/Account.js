@@ -27,7 +27,7 @@ export default function Account({ children }){
         console.log(csrfToken)
 
         try {
-        const res = await axios.post("http://127.0.0.1:8000/create_acc/",
+        const res = await axios.post("https://django-6-0st0.onrender.com/create_acc/",
             {username,email,password,is_recruiter},
             {
                 withCredentials : true,
@@ -51,7 +51,7 @@ export default function Account({ children }){
 
     const get_csrf = async () => {
         try{
-        const res = await axios.get("http://127.0.0.1:8000/csrf/",{
+        const res = await axios.get("https://django-6-0st0.onrender.com/csrf/",{
             withCredentials : true
         })
           Cookies.set("csrftoken", res.data.csrfToken);
