@@ -15,7 +15,7 @@ export default function ProtectedRoute({ children }) {
           "https://django-6-0st0.onrender.com//verify/",
           { withCredentials: true }
         );
-
+console.log("result : ",res.data)
         if (res.data.authenticated) {
           setAuthData({isAuth : true, user : res.data.user});
           console.log("Verify response1:",  res.data);
