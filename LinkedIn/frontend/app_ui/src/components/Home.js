@@ -38,7 +38,7 @@ const handleBack = () => {
       
        <div className={styles.mainheader}>
  
-            {current_user?.length > 0  && (<img style={{'borderRadius' : '50%'}} src={`http://127.0.0.1:8000/media/${current_user[0].pic}`}  alt='profile' width={50} height={50}/> )}
+            {current_user?.length > 0  && (<img style={{'borderRadius' : '50%'}} src={`https://django-6-0st0.onrender.com/media/${current_user[0].pic}`}  alt='profile' width={50} height={50}/> )}
             <button className={styles.postInput} onClick={() => setShow(true)}><strong>Start a post</strong></button>
       
        
