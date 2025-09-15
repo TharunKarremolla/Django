@@ -18,7 +18,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     
     "localhost",
-    "127.0.0.1"
+    "127.0.0.1",
+        "django-4-wm3f.onrender.com"
 ]
 
 # Application definition
