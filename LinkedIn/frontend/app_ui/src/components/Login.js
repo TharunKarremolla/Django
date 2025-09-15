@@ -36,7 +36,7 @@ export default function Login({children}){
 
     const get_csrf = async () => {
             try{
-            const res = await axios.get('http://127.0.0.1:8000/csrf/',{
+            const res = await axios.get('https://django-6-0st0.onrender.com/csrf/',{
                 withCredentials : true
             })
             Cookies.set("csrftoken", res.data.csrfToken);
