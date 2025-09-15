@@ -27,7 +27,7 @@ export default function Post(){
     formData.append('Caption',caption);
 
     try{
-    const res = await axios.post('http://127.0.0.1:8000/Create_post/',formData,{
+    const res = await axios.post('https://django-6-0st0.onrender.com/Create_post/',formData,{
         headers: {
           "Content-Type": "multipart/form-data",
           "X-CSRFToken": csrfToken,
@@ -44,7 +44,7 @@ export default function Post(){
         const getCSRFToken = async()=>{
   
           try {
-          const res = await axios.get('http://127.0.0.1:8000/csrf/')
+          const res = await axios.get('https://django-6-0st0.onrender.com/csrf/')
           Cookies.set("csrftoken",res.data.csrfToken)
           console.log("csrf jnds : " , res.data)
       }catch(error){
