@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children }) {
     const verifyUser = async () => {
       try {
         const res = await axios.get(
-          "http://127.0.0.1:8000/verify/",
+          "https://django-6-0st0.onrender.com//verify/",
           { withCredentials: true }
         );
 
