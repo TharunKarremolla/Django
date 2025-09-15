@@ -27,7 +27,7 @@ export default function Profile() {
   // fetch user data
 const fetch_user = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/user/");
+      const res = await axios.get("https://django-6-0st0.onrender.com/user/");
       setData(res.data.user);
       setBio(res.data.profile[0].bio)
       setProfilePic(res.data.profile[0].pic)
@@ -59,7 +59,7 @@ const fetch_user = async () => {
     formData.append("profilePic", file);
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/upload/", formData, {
+      const res = await axios.post("https://django-6-0st0.onrender.com/upload/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           "X-CSRFToken": csrfToken,
@@ -78,7 +78,7 @@ const fetch_user = async () => {
   const addBio = async() => {
     await getCSRFToken();
     const csrfToken = Cookies.get('csrftoken')
-    const res = await axios.post("http://127.0.0.1:8000/addBio/",{bio},{
+    const res = await axios.post("https://django-6-0st0.onrender.com/addBio/",{bio},{
       withCredentials : true,
       headers : {
           "Content-Type" : "application/json",
@@ -93,7 +93,7 @@ const fetch_user = async () => {
   // get csrf token
   const getCSRFToken = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/csrf/");
+      const res = await axios.get("https://django-6-0st0.onrender.com/csrf/");
       console.log("csrf :", res.data);
     } catch (error) {
       console.log(error);
