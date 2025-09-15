@@ -18,7 +18,7 @@ export default function Login({children}){
         const csrfToken =  Cookies.get('csrftoken')
      
         try {
-                const res = await axios.post('http://127.0.0.1:8000/login/',{email, password},{
+                const res = await axios.post('https://django-6-0st0.onrender.com/login/',{email, password},{
                     withCredentials : true,
                     headers : {
                         "Content-Type" : "application/json",
